@@ -1,0 +1,10 @@
+Sample GI Dictation Script
+===========================
+
+Use this paragraph when testing the prototype recorder/transcriber. Speak clearly but naturally, pausing where the commas appear.
+
+---
+"Patient is a 54 year-old male with pancolitis on vedolizumab, currently reporting three semi-formed bowel movements per day with mild urgency and no bleeding. He denies fever, rash, joint pain, or weight loss. Last colonoscopy in March showed Mayo 1 erythema in the sigmoid colon and random biopsies negative for dysplasia. Calprotectin a month ago was 135. He has been taking mesalamine 2.4 grams twice daily plus nightly hydrocortisone enemas but admits to missing about two doses a week. Physical exam today with soft non-distended abdomen, mild left lower quadrant tenderness, no guarding. Labs pending today include CBC, CMP, CRP, ferritin. Plan is to continue vedolizumab every eight weeks, reinforce adherence to topical therapy, add a two-week budesonide course for breakthrough urgency, and schedule surveillance colonoscopy for March of next year with chromoendoscopy. Follow-up in clinic in eight weeks or sooner if bleeding or nocturnal stooling develops."
+---
+
+Feel free to edit this text with real-world details before recording for physicians. The important part is that it exercises terminology such as "calprotectin," "mesalamine," "vedolizumab," and "budesonide" to stress-test the speech model.

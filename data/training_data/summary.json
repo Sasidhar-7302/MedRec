@@ -1,0 +1,14 @@
+{
+  "total_samples": 2000,
+  "train_samples": 1800,
+  "val_samples": 200,
+  "train_split": 0.9,
+  "files_generated": [
+    "full_dataset.jsonl",
+    "whisper_train.jsonl",
+    "whisper_val.jsonl",
+    "medllama_train.jsonl",
+    "medllama_val.jsonl"
+  ],
+  "estimated_hours": 20.0
+}

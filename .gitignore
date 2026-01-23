@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Project specific
+external/
+models/
+local_storage/
+tmp/
+tmp_extract/
+reports/
+!reports/*.md
+!reports/*.json
+
+# Large data
+data/gi_data.zip
+assets/*.zip
+
+# IDEs
+.vscode/
+.idea/

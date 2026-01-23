@@ -1,0 +1,120 @@
+abdomen
+abdominal pain
+achalasia
+adenomatous polyp
+adeno carcinoma
+anal fissure
+anastomotic stricture
+anemia
+ascites
+autoimmune hepatitis
+Barrett's esophagus
+Beckwith-Wiedemann syndrome
+biliary colic
+biliary obstruction
+bile duct stricture
+bloating
+bowel prep
+budensonide foam
+budesonide
+calprotectin
+capsule endoscopy
+celiac sprue
+cholangiocarcinoma
+cholangitis
+cholecystectomy
+cholecystitis
+choledocholithiasis
+cholelithiasis
+cholestasis
+chronic pancreatitis
+cirrhosis
+Clostridioides difficile
+colon polyp
+colonoscopy
+colostomy
+Crohn's disease
+duodenal ulcer
+duodenitis
+dysphagia
+EGD
+eosinophilic esophagitis
+ERCP
+esophageal manometry
+esophageal varices
+esophagogastroduodenoscopy
+FAP
+fecal calprotectin
+fecal occult blood
+fibroscan
+fistula
+GERD
+GI bleed
+goblet cell metaplasia
+Golytely
+gastroparesis
+gastroscopy
+helicobacter pylori
+hepatic encephalopathy
+hepatic steatosis
+hepatitis B
+hepatitis C
+hepatocellular carcinoma
+IBD flare
+IBS
+ileal resection
+ileitis
+ileostomy
+ileus
+infliximab
+ischemic colitis
+lactulose
+liver biopsy
+liver enzymes
+liver lesion
+low FODMAP diet
+Mallory Weiss tear
+mesalamine
+metoclopramide
+MiraLAX
+MRCP
+mucosal healing
+NAFLD
+NASH
+odynophagia
+pancolitis
+pancreatic cyst
+pancreatic insufficiency
+pancreatitis
+PEG tube
+perianal disease
+PPI therapy
+Primary biliary cholangitis
+Primary sclerosing cholangitis
+proctitis
+protonix
+prucalopride
+psyllium
+rectal bleeding
+rifaximin
+rifampin
+Sigmoid resection
+small bowel obstruction
+Stelara
+stent placement
+stool frequency
+stool urgency
+stricture dilation
+suprep
+tenesmus
+TIF procedure
+ulcerative colitis
+upper GI bleed
+ustekinumab
+vedolizumab
+weight loss
+Zeposia
+Xeljanz
+Skyrizi
+Entyvio
+Dupilumab

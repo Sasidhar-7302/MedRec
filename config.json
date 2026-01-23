@@ -1,0 +1,44 @@
+{
+  "audio": {
+    "sample_rate": 16000,
+    "channels": 1,
+    "input_device": null,
+    "silence_padding_ms": 300
+  },
+  "whisper": {
+    "binary_path": "external\\\\whisper.cpp\\\\build\\\\bin\\\\Release\\\\whisper-cli.exe",
+    "model_path": "models\\\\whisper\\\\ggml-small.en.bin",
+    "faster_model": "base.en",
+    "engine": "auto",
+    "device": "cpu",
+    "compute_type": "int8",
+    "beam_size": 3,
+    "language": "en",
+    "threads": 8,
+    "temperature": 0.0,
+    "translate": false,
+    "extra_args": []
+  },
+  "summarizer": {
+    "provider": "ollama",
+    "base_url": "http://127.0.0.1:11434",
+    "model": "medllama2:latest",
+    "fallback_model": "",
+    "temperature": 0.15,
+    "max_tokens": 600,
+    "prompt_style": "Narrative"
+  },
+  "storage": {
+    "root": "local_storage",
+    "retention_days": 90,
+    "session_prefix": "session",
+    "auto_cleanup": true
+  },
+  "ui": {
+    "theme": "DarkBlue3",
+    "default_summary_format": "Narrative",
+    "transcript_font": "Consolas",
+    "summary_font": "Segoe UI",
+    "max_visible_chars": 8000
+  }
+}
