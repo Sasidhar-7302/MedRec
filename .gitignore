@@ -11,7 +11,6 @@ pip-log.txt
 pip-delete-this-directory.txt
 
 # Project specific
-external/
 models/
 local_storage/
 tmp/
@@ -20,9 +19,15 @@ reports/
 !reports/*.md
 !reports/*.json
 
-# Large data
+# Large data (Over 100MB Limit)
 data/gi_data.zip
 assets/*.zip
+external/OllamaSetup.exe
+external/gi_data.zip
+
+# Build artifacts
+external/whisper.cpp/build/
+external/whisper.cpp/out/
 
 # IDEs
 .vscode/
