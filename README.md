@@ -50,6 +50,22 @@ Ensure `ollama serve` is running.
 ### 4. Configuration
 Copy `config.example.json` to `config.json`. Ensure `model` is set to `llama3`.
 
+## 🔄 Restore from Git (Easy Use)
+
+If you clone this repository on a new machine, follow these steps to get back to "90% Accuracy" mode:
+
+1.  **Environment:** `pip install -r requirements.txt`
+2.  **Ollama (LLM):** 
+    *   Install [Ollama](https://ollama.com).
+    *   `ollama pull llama3` (Matches the modern configuration).
+3.  **Whisper (ASR):**
+    *   Re-build the C++ backend (see **Setup** above).
+    *   Download `ggml-large-v3.bin` into `models/whisper/`.
+4.  **Config:** Ensure your `config.json` points to the new local paths.
+
+**Done!** You are now ready to run `python main.py`.
+
+
 ## 🧪 Verification
 
 Run the full end-to-end pipeline test:
