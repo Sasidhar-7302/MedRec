@@ -1,3 +1,7 @@
+import os
+import sys
+# Add project root to path
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import json
 import logging
@@ -10,39 +14,47 @@ from app.config import load_config
 from app.summarizer import OllamaSummarizer
 
 def parse_summary(summary_text: str) -> Dict[str, str]:
-    """Parse summary into sections."""
+    """Parse summary into sections based on TwoPassSummarizer format."""
     sections = {}
-    current_section = None
+    current_key = None
     buffer = []
     
+    # Header mapping: Header -> Target Key
+    headers = {
+        'hpi (history of present illness):': 'hpi',
+        'findings:': 'findings',
+        'assessment:': 'assessment',
+        'plan:': 'plan',
+        'medications/orders:': 'medications',
+        'follow-up:': 'followup'
+    }
+    
     for line in summary_text.split('\n'):
-        line = line.strip()
-        if not line:
+        strip_line = line.strip()
+        if not strip_line:
             continue
             
-        # Check for section headers
-        lower_line = line.lower()
-        if lower_line.startswith('findings:'):
-            if current_section:
-                sections[current_section] = '\n'.join(buffer).strip()
-            current_section = 'hpi' # Map Findings to hpi for comparison
-            buffer = [line.split(':', 1)[1].strip()]
-        elif lower_line.startswith('assessment:'):
-            if current_section:
-                sections[current_section] = '\n'.join(buffer).strip()
-            current_section = 'assessment'
-            buffer = [line.split(':', 1)[1].strip()]
-        elif lower_line.startswith('plan:'):
-            if current_section:
-                sections[current_section] = '\n'.join(buffer).strip()
-            current_section = 'plan'
-            buffer = [line.split(':', 1)[1].strip()]
-        else:
-            if current_section:
-                buffer.append(line)
+        # Check if line is a header
+        lower_line = strip_line.lower()
+        found_header = False
+        for head, key in headers.items():
+            if lower_line.startswith(head):
+                if current_key:
+                    sections[current_key] = '\n'.join(buffer).strip()
+                current_key = key
+                buffer = []
+                # If there's content after the colon on same line
+                remainder = strip_line[len(head):].strip()
+                if remainder:
+                    buffer.append(remainder)
+                found_header = True
+                break
+        
+        if not found_header and current_key:
+            buffer.append(strip_line)
                 
-    if current_section:
-        sections[current_section] = '\n'.join(buffer).strip()
+    if current_key:
+        sections[current_key] = '\n'.join(buffer).strip()
         
     return sections
 
@@ -82,7 +94,7 @@ def verify_accuracy():
                 data.append(json.loads(line))
     
     # Limit to subset for quick verification if needed, or run all
-    data = data[:2] 
+    data = data[:5] 
     
     print(f"Running verification on {len(data)} samples...")
     
@@ -108,6 +120,16 @@ def verify_accuracy():
             result = summarizer.summarize(input_text, style="Narrative")
             parsed = parse_summary(result.summary)
             
+            if i == 0:
+                print(f"\n--- SAMPLE 1 DEBUG ---")
+                print(f"RAW EXTRACTION:\n{result.raw_extraction if hasattr(result, 'raw_extraction') else 'NA'}")
+                print(f"----------------------")
+                print(f"EXPECTED HPI: {expected_hpi[:100]}...")
+                print(f"PARSED HPI:   {parsed.get('hpi', 'MISSING')[:100]}...")
+                print(f"EXPECTED ASSESS: {expected_assessment}")
+                print(f"PARSED ASSESS:   {parsed.get('assessment', 'MISSING')}")
+                print(f"----------------------\n")
+
             # metrics
             hpi_score = calculate_similarity(parsed.get('hpi', ''), expected_hpi)
             assess_score = calculate_similarity(parsed.get('assessment', ''), expected_assessment)

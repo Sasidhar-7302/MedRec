@@ -1,0 +1,119 @@
+/* GI Specialists of Georgia - Streamlit Theme */
+
+/* Import fonts if needed, otherwise rely on system sans-serif for speed */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+html, body, [class*="css"] {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Primary Colors */
+:root {
+    --primary-teal: #0B8E99;
+    --dark-navy: #1E3A5F;
+    --accent-orange: #E5A54B;
+    --bg-light: #F0F7F8;
+    --text-dark: #1E3A5F;
+    --white: #FFFFFF;
+}
+
+/* Sidebar Styling */
+section[data-testid="stSidebar"] {
+    background-color: var(--dark-navy);
+}
+
+section[data-testid="stSidebar"] h1, 
+section[data-testid="stSidebar"] h2, 
+section[data-testid="stSidebar"] h3, 
+section[data-testid="stSidebar"] label, 
+section[data-testid="stSidebar"] .stMarkdown {
+    color: #FFFFFF !important;
+}
+
+/* Main Background */
+.stApp {
+    background-color: var(--bg-light);
+}
+
+/* Headers */
+h1, h2, h3 {
+    color: var(--dark-navy) !important;
+    font-weight: 700 !important;
+}
+
+h1 {
+    letter-spacing: -1px;
+}
+
+/* Buttons */
+.stButton > button {
+    background-color: var(--primary-teal);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 24px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.stButton > button:hover {
+    background-color: #097A84; /* Darker teal */
+    color: white;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Secondary/Outline Buttons (if we can target them specifically, otherwise generic overrides) */
+/* We'll use specific classes in Python to target these if needed */
+
+/* Audio Recorder Customization */
+.stAudio {
+    margin-top: 20px;
+}
+
+/* Cards / Containers */
+div[data-testid="stVerticalBlock"] > div[style*="background-color"] {
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Custom Success/Info Messages */
+.stAlert {
+    border-radius: 8px;
+}
+
+/* Metrics */
+div[data-testid="stMetricValue"] {
+    color: var(--primary-teal) !important;
+}
+
+div[data-testid="stMetricLabel"] {
+    color: var(--text-dark) !important;
+}
+
+/* Navbar/Tabs */
+.stTabs [data-baseweb="tab-list"] {
+    gap: 8px;
+}
+
+.stTabs [data-baseweb="tab"] {
+    height: 50px;
+    white-space: pre-wrap;
+    background-color: transparent;
+    border-radius: 8px;
+    color: var(--text-dark);
+    font-weight: 600;
+}
+
+.stTabs [aria-selected="true"] {
+    background-color: white !important;
+    color: var(--primary-teal) !important;
+    border-bottom: 3px solid var(--primary-teal) !important;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+/* Expander */
+.streamlit-expanderHeader {
+    background-color: white;
+    border-radius: 8px;
+    color: var(--text-dark);
+}

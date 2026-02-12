@@ -15,7 +15,7 @@ GI_HINTS = (
 
 # Few-shot examples for better context understanding
 FEW_SHOT_EXAMPLES = """
-Example 1:
+Example 1 (Inflammatory Bowel Disease):
 Transcript: "Doctor: What brings you in today? Patient: I've been having abdominal pain for about three days now. Doctor: Can you describe the pain? Patient: It's crampy, worse after I eat. Doctor: Any blood in your stool? Patient: No, no blood. Doctor: When was your last colonoscopy? Patient: About six months ago, they said there was some inflammation. Doctor: What medications are you taking? Patient: Mesalamine, 800 milligrams twice a day."
 HPI (History of Present Illness):
 50-year-old male presents with 3-day history of crampy abdominal pain, postprandial exacerbation. Denies hematochezia or melena. Last colonoscopy 6 months ago showed inflammation. Currently on mesalamine 800mg BID.
@@ -36,7 +36,7 @@ Medications/Orders:
 Follow-up:
 - Return in 4-6 weeks or sooner if symptoms worsen
 
-Example 2:
+Example 2 (GERD Follow-up):
 Transcript: "Doctor: How have you been doing with the GERD? Patient: Much better, the omeprazole is working great. Doctor: Any heartburn or regurgitation? Patient: No, nothing. Doctor: How's your weight? Patient: Stable. Doctor: Blood pressure okay? Patient: Yes, it's been good."
 HPI (History of Present Illness):
 Follow-up visit for GERD. Patient reports excellent response to omeprazole 20mg daily with complete resolution of heartburn and regurgitation. Weight stable. Blood pressure controlled.
@@ -54,6 +54,69 @@ Medications/Orders:
 - Omeprazole 20mg daily (continue)
 Follow-up:
 - Return in 6 months or PRN
+
+Example 3 (Crohn's Disease with Treatment Escalation):
+Transcript: "Doctor: How are your symptoms? Patient: Not great. I'm having diarrhea five to six times a day with some blood. Doctor: Any fever or weight loss? Patient: I lost about 8 pounds. Doctor: You've been on infliximab for how long? Patient: About two years. Doctor: Your calprotectin came back at 650. I think we need to check your drug levels and consider switching biologics."
+HPI (History of Present Illness):
+Patient with Crohn's disease presents with worsening symptoms including diarrhea 5-6x/day with hematochezia and 8-pound weight loss. Currently on infliximab for 2 years.
+Findings:
+- Diarrhea 5-6x daily with blood
+- Weight loss: 8 pounds
+- Fecal calprotectin: 650 (elevated)
+- Current therapy: infliximab x 2 years
+Assessment:
+- Crohn's disease, moderate-severe flare
+- Possible loss of response to infliximab
+Plan:
+- Order therapeutic drug monitoring (infliximab level + antibodies)
+- If low trough or positive antibodies, switch to ustekinumab
+- Order MR enterography to assess disease extent
+Medications/Orders:
+- Infliximab (continue pending TDM results)
+- Labs: infliximab level, anti-drug antibodies, CBC, CMP, CRP
+Follow-up:
+- Urgent follow-up in 1-2 weeks for TDM results
+
+Example 4 (Barrett's Esophagus Surveillance):
+Transcript: "Doctor: You're here for your Barrett's surveillance EGD results. Patient: Yes, I was worried about those. Doctor: Good news - the biopsies showed no dysplasia. Patient: That's a relief. Doctor: You're still taking your PPI twice daily? Patient: Yes, pantoprazole 40mg morning and night. Doctor: Any heartburn or difficulty swallowing? Patient: None at all."
+HPI (History of Present Illness):
+Follow-up for Barrett's esophagus surveillance. Patient on pantoprazole 40mg BID reports no reflux symptoms or dysphagia.
+Findings:
+- EGD with biopsies: Barrett's esophagus without dysplasia
+- No active GERD symptoms
+- No dysphagia
+- Current medication: pantoprazole 40mg BID
+Assessment:
+- Barrett's esophagus, no dysplasia, stable
+- GERD well-controlled on high-dose PPI
+Plan:
+- Continue pantoprazole 40mg BID
+- Repeat surveillance EGD in 3 years per guidelines
+- Continue lifestyle modifications
+Medications/Orders:
+- Pantoprazole 40mg BID (continue)
+Follow-up:
+- Surveillance EGD in 3 years
+
+Example 5 (Biliary Colic):
+Transcript: "Doctor: Tell me about the pain you're having. Patient: It's in my right upper belly, comes after I eat fatty foods. Doctor: How long does the pain last? Patient: Usually an hour or two. Doctor: Any fever or jaundice? Patient: No. Doctor: Your ultrasound shows gallstones. I think we should refer you for surgery."
+HPI (History of Present Illness):
+Patient presents with episodic right upper quadrant pain occurring postprandially, particularly after fatty meals. Pain typically lasts 1-2 hours. Denies fever, jaundice, or signs of cholecystitis.
+Findings:
+- RUQ pain, postprandial, 1-2 hour duration
+- Triggered by fatty foods
+- No fever or jaundice
+- Ultrasound: cholelithiasis
+Assessment:
+- Symptomatic cholelithiasis (biliary colic)
+Plan:
+- Refer to general surgery for laparoscopic cholecystectomy
+- Low-fat diet until surgery
+- Return to ED if fever, persistent pain >6 hours, or jaundice
+Medications/Orders:
+- Surgical referral: laparoscopic cholecystectomy
+Follow-up:
+- Post-surgical follow-up as directed by surgeon
 """
 
 PROMPTS: Dict[str, str] = {

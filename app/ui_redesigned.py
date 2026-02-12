@@ -57,7 +57,7 @@ class AnimatedMicWidget(QWidget):
 
     def __init__(self, parent: Optional[QWidget] = None):
         super().__init__(parent)
-        self.setFixedSize(180, 180)
+        self.setFixedSize(120, 120)  # Smaller size to prevent overlap
         self._recording = False
         self._pulse_value = 0.0
         self._animation = QPropertyAnimation(self, b"pulseValue")
@@ -91,18 +91,18 @@ class AnimatedMicWidget(QWidget):
 
         # Background circle
         center = self.rect().center()
-        base_radius = 70
+        base_radius = 45  # Smaller radius for 120x120 widget
 
         if self._recording:
             # Pulsing effect when recording
             scale = 1.0 + (0.15 * self._pulse_value)
             radius = base_radius * scale
-            color = QColor("#EF4444")
-            glow_color = QColor("#F87171")
+            color = QColor("#E5A54B")  # Orange accent for recording
+            glow_color = QColor("#E5A54B")
         else:
             radius = base_radius
-            color = QColor("#0EA5E9")
-            glow_color = QColor("#38BDF8")
+            color = QColor("#0B8E99")  # Teal primary
+            glow_color = QColor("#0B8E99")
 
         # Draw glow
         painter.setBrush(Qt.NoBrush)
@@ -120,33 +120,33 @@ class AnimatedMicWidget(QWidget):
 
         # Draw microphone icon
         painter.setBrush(Qt.white)
-        mic_width = 24
-        mic_height = 36
+        mic_width = 18
+        mic_height = 28
         mic_rect = QRectF(
             center.x() - mic_width / 2,
-            center.y() - mic_height / 2 - 8,
+            center.y() - mic_height / 2 - 5,
             mic_width,
             mic_height,
         )
-        painter.drawRoundedRect(mic_rect, 12, 12)
+        painter.drawRoundedRect(mic_rect, 9, 9)
 
         # Mic stand
-        stand_width = 8
-        stand_height = 20
+        stand_width = 6
+        stand_height = 14
         stand_rect = QRectF(
             center.x() - stand_width / 2,
-            center.y() + 12,
+            center.y() + 8,
             stand_width,
             stand_height,
         )
-        painter.drawRoundedRect(stand_rect, 4, 4)
+        painter.drawRoundedRect(stand_rect, 3, 3)
 
         # Mic base
-        base_width = 32
-        base_height = 4
+        base_width = 24
+        base_height = 3
         painter.drawRoundedRect(
             center.x() - base_width / 2,
-            center.y() + 30,
+            center.y() + 20,
             base_width,
             base_height,
             2,
@@ -372,7 +372,7 @@ class MedRecWindow(QMainWindow):
         self.logger.info("UI ready")
 
     def _init_ui(self) -> None:
-        self.setWindowTitle("MedRec - Medical Dictation Assistant")
+        self.setWindowTitle("GI Scribe - Gastroenterology Dictation Assistant")
         self.setMinimumSize(1200, 800)
         self._apply_styles()
 
@@ -394,17 +394,17 @@ class MedRecWindow(QMainWindow):
     def _apply_styles(self) -> None:
         self.setStyleSheet("""
             QMainWindow {
-                background-color: #F5F7FA;
+                background-color: #F0F7F8;
             }
             QWidget {
-                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+                font-family: 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif;
             }
             QFrame#Sidebar {
-                background-color: #FFFFFF;
-                border-right: 1px solid #E5E7EB;
+                background-color: #1E3A5F;
+                border-right: none;
             }
             QFrame#ContentArea {
-                background-color: #F5F7FA;
+                background-color: #F0F7F8;
             }
             QPushButton#NavButton {
                 background-color: transparent;
@@ -413,45 +413,44 @@ class MedRecWindow(QMainWindow):
                 padding: 16px 24px;
                 font-size: 15px;
                 font-weight: 500;
-                color: #64748B;
-                border-radius: 12px;
-                margin: 2px 8px;
+                color: rgba(255, 255, 255, 0.7);
+                border-radius: 8px;
+                margin: 4px 12px;
             }
             QPushButton#NavButton:hover {
-                background-color: #F1F5F9;
-                color: #334155;
+                background-color: rgba(255, 255, 255, 0.1);
+                color: #FFFFFF;
             }
             QPushButton#NavButton:checked {
-                background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #E0F2FE, stop:1 #DBEAFE);
-                color: #0C4A6E;
+                background-color: #0B8E99;
+                color: #FFFFFF;
                 font-weight: 600;
-                border-left: 4px solid #0EA5E9;
             }
             QFrame#FolderCard {
                 background-color: #FFFFFF;
-                border: 1px solid #E5E7EB;
+                border: 1px solid #E2E8F0;
                 border-radius: 12px;
             }
             QFrame#FolderCard:hover {
-                background-color: #F9FAFB;
-                border-color: #D1D5DB;
+                background-color: #F8FAFB;
+                border-color: #0B8E99;
             }
             QFrame#RecordingCard {
                 background-color: #FFFFFF;
-                border: 1px solid #E5E7EB;
+                border: 1px solid #E2E8F0;
                 border-radius: 12px;
             }
             QFrame#RecordingCard:hover {
-                background-color: #F9FAFB;
-                border-color: #D1D5DB;
+                background-color: #F8FAFB;
+                border-color: #0B8E99;
             }
             QFrame#Card {
                 background-color: #FFFFFF;
-                border: 1px solid #E5E7EB;
+                border: 1px solid #E2E8F0;
                 border-radius: 16px;
             }
             QPushButton#PrimaryButton {
-                background-color: #3B82F6;
+                background-color: #0B8E99;
                 color: white;
                 border: none;
                 border-radius: 8px;
@@ -461,19 +460,19 @@ class MedRecWindow(QMainWindow):
                 min-height: 44px;
             }
             QPushButton#PrimaryButton:hover {
-                background-color: #2563EB;
+                background-color: #097A84;
             }
             QPushButton#PrimaryButton:pressed {
-                background-color: #1D4ED8;
+                background-color: #086670;
             }
             QPushButton#PrimaryButton:disabled {
-                background-color: #E5E7EB;
-                color: #9CA3AF;
+                background-color: #CBD5E1;
+                color: #94A3B8;
             }
             QPushButton#SecondaryButton {
                 background-color: #FFFFFF;
-                color: #374151;
-                border: 1px solid #E5E7EB;
+                color: #1E3A5F;
+                border: 1px solid #E2E8F0;
                 border-radius: 8px;
                 padding: 12px 24px;
                 font-size: 14px;
@@ -481,15 +480,15 @@ class MedRecWindow(QMainWindow):
                 min-height: 44px;
             }
             QPushButton#SecondaryButton:hover {
-                background-color: #F9FAFB;
-                border-color: #D1D5DB;
-                color: #111827;
+                background-color: #F0F7F8;
+                border-color: #0B8E99;
+                color: #0B8E99;
             }
             QPushButton#SecondaryButton:pressed {
-                background-color: #F3F4F6;
+                background-color: #E8F4F8;
             }
             QPushButton#DangerButton {
-                background-color: #EF4444;
+                background-color: #E5A54B;
                 color: white;
                 border: none;
                 border-radius: 8px;
@@ -499,58 +498,58 @@ class MedRecWindow(QMainWindow):
                 min-height: 44px;
             }
             QPushButton#DangerButton:hover {
-                background-color: #DC2626;
+                background-color: #D4943A;
             }
             QPushButton#DangerButton:pressed {
-                background-color: #B91C1C;
+                background-color: #C38329;
             }
             QPushButton#IconButton {
                 background-color: #FFFFFF;
-                border: 1px solid #E5E7EB;
+                border: 1px solid #E2E8F0;
                 border-radius: 8px;
                 padding: 8px 16px;
                 font-size: 13px;
                 font-weight: 500;
-                color: #6B7280;
+                color: #1E3A5F;
             }
             QPushButton#IconButton:hover {
-                background-color: #F9FAFB;
-                border-color: #D1D5DB;
-                color: #374151;
+                background-color: #F0F7F8;
+                border-color: #0B8E99;
+                color: #0B8E99;
             }
             QPushButton#IconButton:pressed {
-                background-color: #F3F4F6;
+                background-color: #E8F4F8;
             }
             QTextEdit {
                 background-color: #FFFFFF;
-                border: 1px solid #E5E7EB;
+                border: 1px solid #E2E8F0;
                 border-radius: 8px;
                 padding: 16px;
                 font-size: 14px;
                 line-height: 1.6;
-                color: #111827;
-                selection-background-color: #DBEAFE;
-                selection-color: #0C4A6E;
+                color: #1E3A5F;
+                selection-background-color: #D1F0F3;
+                selection-color: #0B8E99;
             }
             QTextEdit:focus {
-                border-color: #3B82F6;
+                border-color: #0B8E99;
                 background-color: #FFFFFF;
             }
             QComboBox {
                 background-color: #FFFFFF;
-                border: 1px solid #E5E7EB;
+                border: 1px solid #E2E8F0;
                 border-radius: 8px;
                 padding: 10px 16px;
                 font-size: 14px;
-                color: #111827;
+                color: #1E3A5F;
                 min-height: 20px;
             }
             QComboBox:hover {
-                border-color: #D1D5DB;
-                background-color: #F9FAFB;
+                border-color: #0B8E99;
+                background-color: #F8FAFB;
             }
             QComboBox:focus {
-                border-color: #3B82F6;
+                border-color: #0B8E99;
             }
             QComboBox::drop-down {
                 border: none;
@@ -560,7 +559,7 @@ class MedRecWindow(QMainWindow):
                 image: none;
                 border-left: 5px solid transparent;
                 border-right: 5px solid transparent;
-                border-top: 6px solid #64748B;
+                border-top: 6px solid #1E3A5F;
                 width: 0px;
                 height: 0px;
             }
@@ -581,14 +580,14 @@ class MedRecWindow(QMainWindow):
                 margin: 2px;
             }
             QScrollBar::handle:vertical:hover {
-                background-color: #94A3B8;
+                background-color: #0B8E99;
             }
             QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
                 height: 0px;
             }
             QCheckBox {
                 font-size: 14px;
-                color: #334155;
+                color: #1E3A5F;
                 spacing: 10px;
             }
             QCheckBox::indicator {
@@ -599,28 +598,28 @@ class MedRecWindow(QMainWindow):
                 background-color: #FFFFFF;
             }
             QCheckBox::indicator:hover {
-                border-color: #94A3B8;
+                border-color: #0B8E99;
             }
             QCheckBox::indicator:checked {
-                background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #0EA5E9, stop:1 #0284C7);
-                border-color: #0284C7;
+                background-color: #0B8E99;
+                border-color: #0B8E99;
             }
             QLineEdit {
                 background-color: #FFFFFF;
-                border: 1px solid #E5E7EB;
+                border: 1px solid #E2E8F0;
                 border-radius: 8px;
                 padding: 10px 16px;
                 font-size: 14px;
-                color: #111827;
-                selection-background-color: #DBEAFE;
-                selection-color: #0C4A6E;
+                color: #1E3A5F;
+                selection-background-color: #D1F0F3;
+                selection-color: #0B8E99;
             }
             QLineEdit:focus {
-                border-color: #3B82F6;
+                border-color: #0B8E99;
                 background-color: #FFFFFF;
             }
             QLineEdit:hover {
-                border-color: #D1D5DB;
+                border-color: #0B8E99;
             }
         """)
 
@@ -638,10 +637,10 @@ class MedRecWindow(QMainWindow):
         header_layout = QVBoxLayout(header)
         header_layout.setContentsMargins(24, 32, 24, 24)
 
-        title = QLabel("MedRec")
-        title.setStyleSheet("font-size: 24px; font-weight: 700; color: #1A1A1A;")
-        subtitle = QLabel("Medical Dictation")
-        subtitle.setStyleSheet("font-size: 13px; color: #757575; margin-top: 4px;")
+        title = QLabel("GI Scribe")
+        title.setStyleSheet("font-size: 26px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.3px;")
+        subtitle = QLabel("Gastroenterology Dictation")
+        subtitle.setStyleSheet("font-size: 13px; color: rgba(255, 255, 255, 0.7); margin-top: 4px;")
 
         header_layout.addWidget(title)
         header_layout.addWidget(subtitle)
@@ -676,7 +675,7 @@ class MedRecWindow(QMainWindow):
         status_layout.setContentsMargins(24, 16, 24, 24)
 
         status_title = QLabel("System Status")
-        status_title.setStyleSheet("font-size: 13px; font-weight: 600; color: #757575; margin-bottom: 8px;")
+        status_title.setStyleSheet("font-size: 13px; font-weight: 600; color: rgba(255, 255, 255, 0.7); margin-bottom: 8px;")
         status_layout.addWidget(status_title)
 
         self.whisper_status = self._create_status_row("Whisper", "Checking...")
@@ -701,7 +700,7 @@ class MedRecWindow(QMainWindow):
         row_layout.setContentsMargins(0, 4, 0, 4)
 
         label_widget = QLabel(label)
-        label_widget.setStyleSheet("font-size: 13px; color: #616161;")
+        label_widget.setStyleSheet("font-size: 13px; color: rgba(255, 255, 255, 0.8);")
         row_layout.addWidget(label_widget)
 
         row_layout.addStretch()
@@ -798,8 +797,8 @@ class MedRecWindow(QMainWindow):
         card.setObjectName("Card")
         card.setStyleSheet(
             "QFrame#Card {"
-            "background-color: #EFF6FF; "
-            "border: 1px solid #BFDBFE; "
+            "background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #E8F4F8, stop:1 #D1F0F3); "
+            "border: 1px solid #B8E6E9; "
             "border-radius: 12px;"
             "}"
         )
@@ -811,20 +810,20 @@ class MedRecWindow(QMainWindow):
         text_col.setSpacing(8)
         title = QLabel("Voice Recorder")
         title.setStyleSheet(
-            "font-size: 24px; font-weight: 700; color: #1E40AF; "
+            "font-size: 24px; font-weight: 700; color: #1E3A5F; "
             "letter-spacing: -0.3px;"
         )
-        subtitle = QLabel("Local-first medical dictation with AI-powered summaries")
-        subtitle.setStyleSheet("font-size: 13px; color: #6B7280; font-weight: 400;")
+        subtitle = QLabel("Local-first GI dictation with AI-powered summaries")
+        subtitle.setStyleSheet("font-size: 13px; color: #4A5568; font-weight: 400;")
         text_col.addWidget(title)
         text_col.addWidget(subtitle)
 
         badges = QHBoxLayout()
         badges.setSpacing(8)
         badge_labels = [
-            ("✓ HIPAA-safe", "#0A6B4B", "#D1FAE5"),
-            ("🎙️ Offline Whisper", "#0C4A6E", "#DBEAFE"),
-            ("🤖 AI Summary", "#7C2D12", "#FED7AA"),
+            ("✓ HIPAA-safe", "#065F46", "#D1FAE5"),
+            ("🎙️ Offline Whisper", "#1E3A5F", "#D1F0F3"),
+            ("🤖 AI Summary", "#92400E", "#FEE2B5"),
         ]
         for label, text_color, bg_color in badge_labels:
             pill = QLabel(label)
@@ -842,7 +841,7 @@ class MedRecWindow(QMainWindow):
         hero_icon = QFrame()
         hero_icon.setFixedSize(80, 80)
         hero_icon.setStyleSheet(
-            "background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #0EA5E9, stop:1 #0284C7); "
+            "background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #0B8E99, stop:1 #097A84); "
             "border-radius: 20px; border: 3px solid #FFFFFF;"
         )
         layout.addWidget(hero_icon, alignment=Qt.AlignRight | Qt.AlignVCenter)
@@ -867,7 +866,7 @@ class MedRecWindow(QMainWindow):
         # Timer
         self.timer_label = QLabel("00:00")
         self.timer_label.setStyleSheet(
-            "font-size: 48px; font-weight: 300; color: #111827; margin-top: 16px; "
+            "font-size: 36px; font-weight: 300; color: #1E3A5F; "
             "letter-spacing: 1px;"
         )
         self.timer_label.setAlignment(Qt.AlignCenter)
@@ -876,7 +875,7 @@ class MedRecWindow(QMainWindow):
         # Status
         self.status_label = QLabel("Ready to record")
         self.status_label.setStyleSheet(
-            "font-size: 13px; color: #6B7280; margin-top: 8px; font-weight: 400;"
+            "font-size: 13px; color: #4A5568; margin-top: 8px; font-weight: 400;"
         )
         self.status_label.setAlignment(Qt.AlignCenter)
         mic_layout.addWidget(self.status_label)

@@ -1,0 +1,9 @@
+unsloth
+xformers
+bitsandbytes
+peft
+accelerate
+transformers
+datasets
+trl
+sentencepiece

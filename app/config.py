@@ -19,6 +19,16 @@ class AudioConfig:
     silence_padding_ms: int = 300
 
 
+
+@dataclass
+class DiarizationConfig:
+    enabled: bool = False
+    provider: str = "whisperx"  # whisperx or pyannote
+    auth_token_env: str = "HF_TOKEN"
+    min_speakers: Optional[int] = None
+    max_speakers: Optional[int] = None
+
+
 @dataclass
 class WhisperConfig:
     binary_path: str = "external/whisper.cpp/build/bin/Release/main.exe"
@@ -33,6 +43,24 @@ class WhisperConfig:
     temperature: float = 0.0
     translate: bool = False
     extra_args: List[str] = field(default_factory=lambda: ["--print-progress"])
+    diarization: DiarizationConfig = field(default_factory=DiarizationConfig)
+
+    @staticmethod
+    def from_dict(data: Dict[str, Any]) -> "WhisperConfig":
+        # Handle nested diarization config
+        diarization_data = data.get("diarization", {})
+        # Remove diarization from data copy to avoid double passing if we were using **kwargs
+        # But here we filter keys. 
+        # Easier: Extract known keys.
+        # Let's just create DiarizationConfig first
+        diar_config = DiarizationConfig(**diarization_data) if diarization_data else DiarizationConfig()
+        
+        # Filter data for WhisperConfig fields
+        valid_keys = {f.name for f in field(default_factory=dict).metadata} # wait, this is hard with dataclasses
+        # Simpler: just pass everything and let it explode? No.
+        # Let's manual construct.
+        clean_data = {k: v for k, v in data.items() if k != "diarization"}
+        return WhisperConfig(diarization=diar_config, **clean_data)
 
 
 @dataclass
@@ -45,6 +73,8 @@ class SummarizerConfig:
     max_tokens: int = 500
     prompt_style: str = "Narrative"
     timeout_s: int = 600
+    context_window: int = 2048
+    use_self_correction: bool = True
 
 
 @dataclass
@@ -76,7 +106,7 @@ class AppConfig:
     def from_dict(raw: Dict[str, Any]) -> "AppConfig":
         return AppConfig(
             audio=AudioConfig(**raw.get("audio", {})),
-            whisper=WhisperConfig(**raw.get("whisper", {})),
+            whisper=WhisperConfig.from_dict(raw.get("whisper", {})),
             summarizer=SummarizerConfig(**raw.get("summarizer", {})),
             storage=StorageConfig(**raw.get("storage", {})),
             ui=UIConfig(**raw.get("ui", {})),

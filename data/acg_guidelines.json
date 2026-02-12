@@ -1,0 +1,32 @@
+[
+    {
+        "id": "crc_screening_average_risk",
+        "topic": "Colorectal Cancer Screening (Average Risk)",
+        "content": "ACG 2021 Guidelines recommend colorectal cancer screening in average-risk individuals beginning at age 45. Preferred screening strategies are Colonoscopy every 10 years or FIT (Fecal Immunochemical Test) annually. For individuals with a family history of CRC in a first-degree relative diagnosed <60 years, screening should begin at age 40 or 10 years before the index case diagnosis, whichever is earlier, and repeat every 5 years."
+    },
+    {
+        "id": "gerd_management",
+        "topic": "GERD Management",
+        "content": "ACG 2022 Guidelines for GERD: An 8-week course of PPIs is the therapy of choice for symptom relief and healing of erosive esophagitis. Maintenance PPI therapy should be administered for EE Los Angeles grade C or D and Barrett's esophagus. For patients with NERD (Non-Erosive Reflux Disease), on-demand or intermittent PPI therapy is adequate."
+    },
+    {
+        "id": "barretts_surveillance",
+        "topic": "Barrett's Esophagus Surveillance",
+        "content": "ACG Guidelines for Barrett's Esophagus: For patients with non-dysplastic Barrett's esophagus, endoscopic surveillance should be performed every 3-5 years. Patients with indefinite for dysplasia should ideally undergo a repeat endoscopy after optimization of acid suppressive therapy for 3-6 months. Low-grade dysplasia should be managed with endoscopic eradication therapy or surveillance every 12 months."
+    },
+    {
+        "id": "ibs_subtypes",
+        "topic": "IBS Subtypes and Management",
+        "content": "ACG 2021 Guidelines for IBS: IBS is categorized into IBS-C (constipation predominant), IBS-D (diarrhea predominant), IBS-M (mixed), and IBS-U (unclassified). Diagnosis uses Rome IV criteria: Recurrent abdominal pain on average at least 1 day/week in the last 3 months, associated with defecation, change in stool frequency, or change in stool form. Diet (low FODMAP) and soluble fiber are first-line therapies. Rifaximin is recommended for IBS-D."
+    },
+    {
+        "id": "h_pylori_treatment",
+        "topic": "H. pylori Treatment",
+        "content": "ACG 2017 Guidelines for H. pylori: First-line treatment is Bismuth Quadruple Therapy (PPI, Bismuth, Tetracycline, Metronidazole) for 10-14 days, especially in areas with high clarithromycin resistance. Clarithromycin Triple Therapy (PPI, Clarithromycin, Amoxicillin/Metronidazole) is restricted to patients with no previous macrolide exposure in regions with low (<15%) resistance."
+    },
+    {
+        "id": "ulcerative_colitis_mild_moderate",
+        "topic": "Ulcerative Colitis (Mild-Moderate)",
+        "content": "ACG 2019 Guidelines for Ulcerative Colitis: For mild-to-moderate ulcerative proctitis, rectal 5-ASA (mesalamine) suppositories are first-line. For left-sided or extensive mild-moderate UC, oral 5-ASA (≥2g/day) combined with rectal 5-ASA is superior to oral monotherapy. Systemic corticosteroids should be avoided for maintenance."
+    }
+]

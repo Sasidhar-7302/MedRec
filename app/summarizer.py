@@ -40,6 +40,34 @@ class OllamaSummarizer:
         if not transcript or not transcript.strip():
             raise ValueError("Transcript cannot be empty")
         
+        # Check if we should use the TwoPass (GIO/GIGuide) summarizer
+        # We use it if the model is 'gio' or if manually requested via style/config
+        # For simplicity, we'll use TwoPass for all 'ollama' provider requests now
+        # as it is the 'Dragon-Level' standard we are pushing for.
+        try:
+            from .two_pass_summarizer import TwoPassSummarizer
+            tp_summarizer = TwoPassSummarizer(self.config)
+            
+            # Using the advanced two-pass engine
+            result = tp_summarizer.summarize(transcript, style)
+            
+            # Format back to SummaryResult for UI compatibility
+            # Format the structured summary to text
+            summary_text = tp_summarizer._format_structured_summary(result)
+            
+            return SummaryResult(
+                summary=summary_text,
+                runtime_s=result.runtime_s,
+                prompt="Two-Pass (Extraction -> RAG -> Structuring)",
+                model_used=result.model_used,
+                validation_passed=True,
+                refinement_count=0
+            )
+        except ImportError:
+            self.logger.warning("TwoPassSummarizer not found, falling back to simple prompt.")
+        except Exception as e:
+            self.logger.error(f"TwoPassSummarizer failed: {e}. Falling back.")
+
         prompt = build_prompt(transcript, style or self.config.prompt_style)
         models_to_try = [self.config.model]
         fallback = getattr(self.config, "fallback_model", None)

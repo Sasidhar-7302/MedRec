@@ -1,11 +1,56 @@
+# GI Medical Vocabulary for Whisper Transcription
+# Expanded list of 250+ terms for accurate medical speech recognition
+
+# === ANATOMICAL TERMS ===
 abdomen
-abdominal pain
+abdominal
+esophagus
+esophageal
+stomach
+gastric
+duodenum
+duodenal
+jejunum
+jejunal
+ileum
+ileal
+colon
+colonic
+rectum
+rectal
+anus
+anal
+sphincter
+pylorus
+pyloric
+antrum
+fundus
+cardia
+cecum
+appendix
+sigmoid
+transverse colon
+ascending colon
+descending colon
+hepatic flexure
+splenic flexure
+peritoneum
+mesentery
+omentum
+mucosa
+submucosa
+serosa
+villi
+crypts
+haustra
+taenia coli
+
+# === CONDITIONS & DIAGNOSES ===
 achalasia
+adenocarcinoma
 adenomatous polyp
-adeno carcinoma
-anal fissure
-anastomotic stricture
 anemia
+angiodysplasia
 ascites
 autoimmune hepatitis
 Barrett's esophagus
@@ -14,15 +59,10 @@ biliary colic
 biliary obstruction
 bile duct stricture
 bloating
-bowel prep
-budensonide foam
-budesonide
-calprotectin
-capsule endoscopy
+celiac disease
 celiac sprue
 cholangiocarcinoma
 cholangitis
-cholecystectomy
 cholecystitis
 choledocholithiasis
 cholelithiasis
@@ -30,91 +70,326 @@ cholestasis
 chronic pancreatitis
 cirrhosis
 Clostridioides difficile
+C. difficile
+C. diff
 colon polyp
-colonoscopy
-colostomy
+colitis
+constipation
 Crohn's disease
+diarrhea
+diverticulitis
+diverticulosis
 duodenal ulcer
 duodenitis
+dyspepsia
 dysphagia
-EGD
 eosinophilic esophagitis
-ERCP
-esophageal manometry
 esophageal varices
-esophagogastroduodenoscopy
+esophagitis
 FAP
-fecal calprotectin
-fecal occult blood
-fibroscan
+familial adenomatous polyposis
+fecal incontinence
 fistula
-GERD
-GI bleed
-goblet cell metaplasia
-Golytely
+flatulence
+functional dyspepsia
+gallstones
 gastroparesis
-gastroscopy
-helicobacter pylori
+gastritis
+gastroenteritis
+GERD
+gastroesophageal reflux disease
+GI bleed
+gastrointestinal bleeding
+goblet cell metaplasia
+Helicobacter pylori
+H. pylori
+hematochezia
+hematemesis
+hemorrhoids
 hepatic encephalopathy
 hepatic steatosis
+hepatitis
+hepatitis A
 hepatitis B
 hepatitis C
 hepatocellular carcinoma
+HCC
+hiatal hernia
+hyperemesis
+IBD
+inflammatory bowel disease
 IBD flare
 IBS
-ileal resection
-ileitis
-ileostomy
+irritable bowel syndrome
+IBS-M
+IBS-C
+IBS-D
 ileus
-infliximab
+ileitis
 ischemic colitis
-lactulose
-liver biopsy
-liver enzymes
+jaundice
+lactose intolerance
+liver cirrhosis
 liver lesion
-low FODMAP diet
+Lynch syndrome
 Mallory Weiss tear
-mesalamine
-metoclopramide
-MiraLAX
-MRCP
-mucosal healing
+malabsorption
 NAFLD
+nonalcoholic fatty liver disease
 NASH
+nonalcoholic steatohepatitis
+nausea
+obstipation
 odynophagia
 pancolitis
 pancreatic cyst
 pancreatic insufficiency
 pancreatitis
-PEG tube
+peptic ulcer
 perianal disease
-PPI therapy
-Primary biliary cholangitis
-Primary sclerosing cholangitis
+peritonitis
+polyp
+polyposis
+portal hypertension
+primary biliary cholangitis
+PBC
+primary sclerosing cholangitis
+PSC
 proctitis
-protonix
-prucalopride
-psyllium
+proctocolitis
 rectal bleeding
-rifaximin
-rifampin
-Sigmoid resection
+reflux
+regurgitation
 small bowel obstruction
-Stelara
-stent placement
-stool frequency
-stool urgency
-stricture dilation
-suprep
+SBO
+steatorrhea
+stricture
 tenesmus
-TIF procedure
+ulcer
 ulcerative colitis
 upper GI bleed
+varices
+volvulus
+Zenker's diverticulum
+
+# === PROCEDURES ===
+bowel prep
+capsule endoscopy
+colonoscopy
+colostomy
+EGD
+esophagogastroduodenoscopy
+ERCP
+endoscopic retrograde cholangiopancreatography
+esophageal manometry
+fibroscan
+gastroscopy
+ileostomy
+liver biopsy
+MRCP
+magnetic resonance cholangiopancreatography
+PEG tube
+percutaneous endoscopic gastrostomy
+sigmoidoscopy
+stent placement
+stricture dilation
+TIF procedure
+transoral incisionless fundoplication
+upper endoscopy
+variceal banding
+polypectomy
+EMR
+endoscopic mucosal resection
+ESD
+endoscopic submucosal dissection
+motility study
+pH study
+breath test
+hemostasis
+
+# === MEDICATIONS - GENERIC ===
+adalimumab
+azathioprine
+budesonide
+certolizumab
+cyclosporine
+golimumab
+infliximab
+lactulose
+loperamide
+mercaptopurine
+mesalamine
+methotrexate
+metoclopramide
+natalizumab
+omeprazole
+ondansetron
+pantoprazole
+prednisone
+prucalopride
+psyllium
+rabeprazole
+rifaximin
+rifampin
+risankizumab
+sulfasalazine
+tacrolimus
+tofacitinib
+upadacitinib
 ustekinumab
 vedolizumab
-weight loss
-Zeposia
-Xeljanz
-Skyrizi
+
+# === MEDICATIONS - BRAND NAMES ===
+Asacol
+Apriso
+Canasa
+Colazal
+Delzicol
+Dipentum
+Entocort
 Entyvio
+Golytely
+Humira
+Imodium
+Lialda
+MiraLAX
+Movantik
+Nexium
+Pentasa
+Prevacid
+Prilosec
+Protonix
+Reglan
+Remicade
+Rinvoq
+Rowasa
+Simponi
+Skyrizi
+Stelara
+Suprep
+Sutab
+Trulance
+Tysabri
+Xeljanz
+Xifaxan
+Zeposia
+Zofran
+Dupixent
 Dupilumab
+
+# === LAB VALUES & TESTS ===
+albumin
+ALT
+alanine aminotransferase
+AST
+aspartate aminotransferase
+bilirubin
+calprotectin
+fecal calprotectin
+CBC
+complete blood count
+CMP
+comprehensive metabolic panel
+CRP
+C-reactive protein
+ESR
+erythrocyte sedimentation rate
+fecal occult blood
+FOBT
+GGT
+gamma-glutamyl transferase
+hemoglobin
+hematocrit
+INR
+liver enzymes
+liver function tests
+LFTs
+platelet count
+stool culture
+stool studies
+white blood cell count
+WBC
+
+# === CLINICAL TERMS ===
+acute
+chronic
+flare
+remission
+mild
+moderate
+severe
+active
+inactive
+refractory
+steroid-dependent
+steroid-refractory
+biologic
+biologic therapy
+maintenance therapy
+induction therapy
+step-up therapy
+step-down therapy
+mucosal healing
+endoscopic remission
+clinical remission
+histologic remission
+deep remission
+loss of response
+primary nonresponse
+secondary nonresponse
+therapeutic drug monitoring
+TDM
+trough level
+antibody formation
+immunogenicity
+
+# === DOSING & ADMINISTRATION ===
+BID
+twice daily
+TID
+three times daily
+QD
+once daily
+PRN
+as needed
+mg
+milligrams
+mcg
+micrograms
+IV
+intravenous
+SC
+subcutaneous
+PO
+by mouth
+per rectum
+enema
+suppository
+infusion
+injection
+loading dose
+maintenance dose
+taper
+titrate
+
+# === DIET & NUTRITION ===
+low FODMAP diet
+FODMAP
+gluten-free diet
+lactose-free
+elemental diet
+NPO
+nothing by mouth
+clear liquids
+full liquids
+fiber
+probiotics
+enteral nutrition
+parenteral nutrition
+TPN
+total parenteral nutrition
+malnutrition
+weight loss
+weight gain
+BMI
+body mass index

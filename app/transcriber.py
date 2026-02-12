@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+import os
 import subprocess
 import tempfile
 import time
@@ -10,8 +11,14 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Callable, List, Optional
 
+# Add CUDA libraries to path for faster-whisper on Windows
+CUDA_LIBS_DIR = Path(__file__).parent.parent / "cuda_libs"
+if CUDA_LIBS_DIR.exists():
+    os.environ["PATH"] = str(CUDA_LIBS_DIR) + os.pathsep + os.environ.get("PATH", "")
+
 from .config import WhisperConfig
 from .gi_terms import build_gi_hint
+from .gi_post_processor import process_transcription
 
 
 ProgressCallback = Optional[Callable[[str], None]]
@@ -36,9 +43,68 @@ class WhisperTranscriber:
         self._engine = self._resolve_engine()
 
     def transcribe(self, audio_path: Path, progress_cb: ProgressCallback = None) -> TranscriptionResult:
+        # Check for diarization request
+        if getattr(self.config, "diarization", None) and self.config.diarization.enabled:
+             if self.config.diarization.provider == "whisperx":
+                 return self._transcribe_diarized(audio_path, progress_cb)
+        
         if self._engine == "faster":
             return self._transcribe_faster(audio_path, progress_cb)
         return self._transcribe_cli(audio_path)
+
+    def _transcribe_diarized(self, audio_path: Path, progress_cb: ProgressCallback) -> TranscriptionResult:
+        """Transcribe using GIEar (WhisperX) with speaker diarization."""
+        try:
+            from .diarizer import Diarizer
+        except ImportError as e:
+            raise RuntimeError(f"GIEar (Diarizer) import failed: {e}")
+
+        self.logger.info("Starting GIEar Diarization on %s", audio_path)
+        start = time.perf_counter()
+        
+        # Initialize Diarizer (it loads models on demand)
+        # Note: We might want to cache this instance if possible, but for now allow re-init per call or trust Diarizer to handle caching
+        # Actually Diarizer class in app/diarizer.py re-loads models. 
+        # Refinement: We should probably instantiate Diarizer once if possible, or just use it as is.
+        # For this instruction, we'll instantiate it here.
+        model_name = self.config.faster_model or "large-v3"
+        diarizer = Diarizer(device=self.config.device if self.config.device != "auto" else "cuda", 
+                           compute_type=self.config.compute_type,
+                           model_name=model_name)
+        
+        # Run pipeline with medical biasing
+        prompt_hint = build_gi_hint(max_terms=60)
+        segments = diarizer.process_audio(
+            str(audio_path),
+            min_speakers=self.config.diarization.min_speakers,
+            max_speakers=self.config.diarization.max_speakers,
+            initial_prompt=prompt_hint
+        )
+        
+        # Format output
+        formatted_lines = []
+        for seg in segments:
+            start_fmt = time.strftime('%H:%M:%S', time.gmtime(seg['start']))
+            end_fmt = time.strftime('%H:%M:%S', time.gmtime(seg['end']))
+            line = f"[{start_fmt} - {end_fmt}] {seg['speaker']}: {seg['text']}"
+            formatted_lines.append(line)
+            if progress_cb:
+                progress_cb(line)
+                
+        full_text = "\n".join(formatted_lines)
+        runtime = time.perf_counter() - start
+        
+        # Cleanup
+        diarizer.cleanup()
+        
+        return TranscriptionResult(
+            text=full_text,
+            runtime_s=runtime,
+            command=["diarizer", "whisperx"],
+            output_path=audio_path,
+            segments=[s['text'] for s in segments] # Store raw text segments
+        )
+
 
     def _resolve_engine(self) -> str:
         requested = (self.config.engine or "auto").lower()
@@ -173,8 +239,10 @@ class WhisperTranscriber:
                 progress_cb(" ".join(collected).strip())
         runtime = time.perf_counter() - start
         full_text = " ".join(collected).strip()
+        # Apply GI-specific post-processing for accuracy
+        processed_text = process_transcription(full_text)
         return TranscriptionResult(
-            text=full_text,
+            text=processed_text,
             runtime_s=runtime,
             command=["faster-whisper", self.config.faster_model or self.config.model_path],
             output_path=audio_path,

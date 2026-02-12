@@ -30,5 +30,20 @@ external/whisper.cpp/build/
 external/whisper.cpp/out/
 
 # IDEs
-.vscode/
-.idea/
+
+# Large/Temp files
+cuda_libs/
+cuda_libs.7z
+unsloth_compiled_cache/
+debug_output.txt
+results.txt
+verify90_output.txt
+config.json
+*.mp3
+*.wav
+data/GiAudiotest/
+data/GiTestValid/
+external/whisperx_new/
+external/*.exe
+external/faster-whisper/
+temp/
